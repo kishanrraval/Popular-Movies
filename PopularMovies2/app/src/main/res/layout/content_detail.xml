@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.kishan.popularmovies.DetailActivity"
+    tools:showIn="@layout/activity_detail">
+
+    <!--title, release date, movie poster, vote average, and plot synopsis.-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="275dp"
+                android:layout_margin="0dp"
+                android:id="@+id/mvi_poster"
+                android:layout_weight="1"/>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:background="#c0c0c0"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mvi_rating"
+                    android:layout_marginLeft="5dp"
+                    android:paddingTop="50dp"
+                    android:textSize="25dp"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mvi_releaseDate"
+                    android:paddingTop="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="25dp"
+                    android:textColor="#000000"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#c0c0c0"
+            android:paddingTop="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/detail_description"
+            android:textSize="25dp"
+            android:textColor="#000000"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mvi_description"
+            android:paddingLeft="16dp"
+            android:paddingRight="10dp"
+            />
+    </LinearLayout>
+</ScrollView>

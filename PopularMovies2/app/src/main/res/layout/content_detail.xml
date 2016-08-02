@@ -31,6 +31,7 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:background="#c0c0c0"/>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -43,7 +44,7 @@
                     android:id="@+id/mvi_rating"
                     android:layout_marginLeft="5dp"
                     android:paddingTop="50dp"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textColor="#000000"/>
 
                 <TextView
@@ -52,7 +53,7 @@
                     android:id="@+id/mvi_releaseDate"
                     android:paddingTop="16dp"
                     android:layout_marginLeft="5dp"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textColor="#000000"/>
             </LinearLayout>
 
@@ -68,7 +69,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="@string/detail_description"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textColor="#000000"/>
         <TextView
             android:layout_width="match_parent"

@@ -1,8 +1,14 @@
 package com.example.kishan.popularmovies;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -20,6 +26,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,11 +58,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        myAdapter = new MovieAdapter(getApplicationContext(),  new ArrayList<Movie>());
-
+        myAdapter = new MovieAdapter(getApplicationContext(), new ArrayList<Movie>());
         GridView myList = (GridView) findViewById(R.id.gridview);
-
         myList.setAdapter(myAdapter);
+
 
 
 
@@ -130,12 +137,37 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        updateMovies();
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(networkStateReceiver  , new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
     }
+
+    private BroadcastReceiver networkStateReceiver=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo ni = manager.getActiveNetworkInfo();
+            boolean isConnected = ni != null &&
+                    ni.isConnectedOrConnecting();
+
+
+            if (isConnected) {
+                updateMovies();
+            } else {
+                Snackbar.make(findViewById(R.id.parent_View), "No Internet Connection", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Start Wifi", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+                                wifi.setWifiEnabled(true);
+                            }
+                        })
+                        .setActionTextColor(getResources().getColor(R.color.holo_blue_light)).show();
+            }
+        }
+    };
 
     private void updateMovies()
     {
@@ -166,13 +198,14 @@ public class MainActivity extends AppCompatActivity {
 
         private String LOG_TAG = FetchMovies.class.getSimpleName();
 
-        private Movie[] getJSONMovieData(String JSONString) throws JSONException {
+        private Movie[] getJSONMovieData(String JSONString) throws JSONException{
 
             final String MVI_RESULT = "results";
             final String PATH = "poster_path";
             final String TITLE = "title";
 
             JSONObject movieJSON = new JSONObject(JSONString);
+
             JSONArray mviArray = movieJSON.getJSONArray(MVI_RESULT);
 
             Movie[] movieList = new Movie[20];
@@ -238,7 +271,10 @@ public class MainActivity extends AppCompatActivity {
                     buffer.append(line + "\n");
                 }
                 if(buffer.length() == 0)
+                {
+                    // Stream was empty.  No point in parsing.
                     return null;
+                }
 
                 dataIn = buffer.toString(); //Storing Data coming into String
 

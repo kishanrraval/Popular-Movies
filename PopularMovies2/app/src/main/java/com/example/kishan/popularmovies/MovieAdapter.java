@@ -16,7 +16,8 @@ import java.util.Random;
 
 public class MovieAdapter extends ArrayAdapter<Movie>{
 
-    public MovieAdapter(Context context, List<Movie> movies) {
+    public MovieAdapter(Context context, List<Movie> movies)
+    {
         super(context,0, movies);
     }
 
@@ -32,16 +33,6 @@ public class MovieAdapter extends ArrayAdapter<Movie>{
 
         TextView text = (TextView) rootView.findViewById(R.id.name_item);
         text.setText(movie.getName());
-
-        /*Random rand = new Random();
-
-        int r = rand.nextInt(255);
-        int g = rand.nextInt(255);
-        int b = rand.nextInt(255);
-
-        int randomColor = Color.rgb(r,g,b);
-
-        rootView.setBackgroundColor(randomColor);*/
 
         return rootView;
     }

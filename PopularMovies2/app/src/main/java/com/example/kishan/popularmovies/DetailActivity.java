@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+
 public class DetailActivity extends AppCompatActivity {
 
     @Override
@@ -35,8 +36,6 @@ public class DetailActivity extends AppCompatActivity {
         poster = bundle.getString(POSTER);
         vote = bundle.getString(VOTE);
         synopsis = bundle.getString(SYNOPSIS);
-
-
 
         ImageView img_poster = (ImageView)findViewById(R.id.mvi_poster);
         Picasso.with(getBaseContext()).load("https://image.tmdb.org/t/p/w300_and_h450_bestv2" + poster).into(img_poster);

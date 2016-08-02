@@ -2,9 +2,7 @@
     <string name="app_name">Popular Movies</string>
     <string name="action_settings">Settings</string>
 
-	<!--Add API key below-->
-    <string name="api_key">API_KEY</string>
-	
+    <string name="api_key">8009ae9da9cdf8ae70b36e5530badc27</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="menu_item_popular">Most Popular</string>
     <string name="menu_item_topRated">Top Rated</string>
